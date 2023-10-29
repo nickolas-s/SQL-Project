@@ -1,13 +1,8 @@
-# Part 2: Data Cleaning
+-- Part 2: Data Cleaning
 
-## What issues will you address by cleaning the data?
-See the notes below for each table. The sql file with the following codes has been uploaded to the repository as well.
-
-## Queries: Below, provide the SQL queries you used to clean your data.
-
-#### Products Table
-
-```sql
+--------------------------------------------------------------------------------------
+-- PRODUCTS TABLE
+--------------------------------------------------------------------------------------
 -- Look for null values
 SELECT *
 FROM products
@@ -47,10 +42,10 @@ SELECT * FROM working_products;
 -- Rename column name
 ALTER TABLE clean_products
 	RENAME COLUMN name TO product_name;
-```
 
-#### Sales Report Table
-```sql
+--------------------------------------------------------------------------------------
+-- SALES REPORT TABLE
+--------------------------------------------------------------------------------------
 -- Look for null values
 SELECT *
 FROM sales_report
@@ -95,10 +90,10 @@ SELECT * FROM working_sales_report;
 -- Rename column name
 ALTER TABLE clean_sales_report
 	RENAME COLUMN name TO product_name;
-```
 
-#### Sales By SKU Table
-```sql
+--------------------------------------------------------------------------------------
+-- SALES BY SKU TABLE
+--------------------------------------------------------------------------------------
 -- Look for null values
 SELECT *
 FROM sales_by_sku
@@ -173,10 +168,10 @@ FROM clean_sales_by_sku
 UNION ALL
 SELECT 'total clean_sales_report', SUM(total_ordered)
 FROM clean_sales_report;
-```
 
-#### Analytics Table
-```sql
+--------------------------------------------------------------------------------------
+-- ANALYTICS TABLE
+--------------------------------------------------------------------------------------
 -- Remove all duplicate rows
 -- Convert the visit_star_time to timestamp
 -- Convert the time_on_site from integer to interval and add 0 for null values
@@ -223,10 +218,10 @@ ALTER COLUMN unit_price TYPE NUMERIC;
 -- Insert clean data from the view table into the new clean table
 INSERT INTO clean_analytics
 SELECT * FROM working_analytics;
-```
 
-#### All Sessions Table
-```sql
+--------------------------------------------------------------------------------------
+-- ALL SESSIONS TABLE
+--------------------------------------------------------------------------------------
 -- Change '(not set)' on country and product_variant columns to 'n/a'
 -- Change '(not set)' and 'not available in demo dataset' on city column to 'n/a'
 -- Divide total_transaction_revenue, product_price, product_revenue and transaction_revenue columns by 1,000,000 to get the correct value
@@ -361,4 +356,3 @@ DROP COLUMN item_quantity, -- all nulls
 DROP COLUMN item_revenue, -- all nulls
 DROP COLUMN search_keyword, -- all nulls
 DROP COLUMN transaction_revenue; -- Same values as total_transaction_revenue column
-```
